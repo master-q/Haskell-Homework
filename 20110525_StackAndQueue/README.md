@@ -1,33 +1,5 @@
 StackとQueueを作ってみよう
 ==========================
 
-StackとQueueの型クラスを作成してください
-----------------------------------------
-
-以下のようなStackとQueueの型クラスを作成してください。
-
-    class Stack where
-      empty :: xxxxx
-      isEmpty:: xxxxx
-      cons :: xxxxx
-      head :: xxxxx
-      tail :: xxxxx
-    class Queue where
-      empty :: xxxxx
-      isEmpty :: xxxxx
-      snoc :: xxxxx
-      head :: xxxxx
-      tail :: xxxxx
-
-作成したStackとQueueクラスをテストしてください
-----------------------------------------------
-
-余力があれば、本ディレクトリに添付されている以下のテストコードを参考にして、
-ユニットテストを実施してみてください。
-
-* StackTest.hs : Stackのユニットテスト(errorで停止版)
-* SafeStackTest.hs : Stackのユニットテスト(Maybe版)
-* QueueTest.hs : Queueのユニットテスト(errorで停止版)
-* SafeQueueTest.hs : Queueのユニットテスト(Maybe版)
-
-上記ソースコードとは別の方法でテストを実施してもOKです。
+[初心者Haskell勉強会第3回](http://partake.in/events/2e985699-5b67-4948-a1b4-1810b652971e)
+の宿題に対する @master_q の回答。
