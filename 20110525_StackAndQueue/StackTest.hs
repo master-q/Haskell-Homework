@@ -4,14 +4,16 @@ import qualified Stack as S
 
 e1, e2, e3 :: Int
 (e1, e2, e3) = (1, 2, 3)
-s0, s1, s2, s3 :: S.SimpleStack Int
+s0 :: S.SimpleStack a
 s0 = S.empty
+s1, s2, s3 :: S.SimpleStack Int -- わかる範囲ないであれば型を人間が指定すべき (虎)
 s1 = e1 `S.cons` s0
 s2 = e2 `S.cons` s1
 s3 = e3 `S.cons` s2
 
 testEmpty :: Test
 testEmpty = let r = S.isEmpty s0
+-- testEmpty = let r = (S.empty == s0) -- これは失敗するよね!
             in  TestCase $ assertBool "isEmpty of empty failed" r
 
 testNotEmpty :: Test
