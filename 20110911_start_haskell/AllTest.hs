@@ -2,6 +2,7 @@ module Main (main) where
 import Test.HUnit
 import MagComp
 import ApproxEq
+import CompLevel
 
 -- MagComp
 testMagComp1000 :: Test
@@ -43,13 +44,22 @@ testApproxZero =
                   where r1 = approxZero (-1 / 999)
                         r2 = approxZero (0.5 ** 14)
 
+-- compLevel
+testCompLevel :: Test
+testCompLevel =
+  TestCase $ do assertEqual "compLevel (720, 480) (30000 / 1001) (120 * 60) 128 700 = 361.5448" 361.5448 r1
+                assertEqual "compLevel (352, 288) 25 (120 * 60) 128 700 = 88.466" 88.466 r2
+                  where r1 = compLevel (720, 480) (30000 / 1001) (120 * 60) 128 700
+                        r2 = compLevel (352, 288) 25 (120 * 60) 128 700
+
 tests :: Test
 tests = TestList [TestLabel "testMagComp1000" testMagComp1000,
                   TestLabel "testMagComp15" testMagComp15,
                   TestLabel "testMagComp05" testMagComp05,
                   TestLabel "testApproxEq" testApproxEq,
                   TestLabel "testApproxEq'" testApproxEq',
-                  TestLabel "testApproxZero" testApproxZero]
+                  TestLabel "testApproxZero" testApproxZero,
+                  TestLabel "testCompLevel" testCompLevel]
 
 main :: IO Counts
 main = runTestTT tests
