@@ -1,20 +1,16 @@
 SRCS := $(wildcard *.hs)
-SRCS_TEST := $(wildcard *Test.hs)
-BIN_TEST := $(subst .hs,,$(SRCS_TEST))
 
-$(BIN_TEST):
-	ghc --make -Wall $(BIN_TEST).hs
+AllTest: $(SRCS)
+	ghc --make -Wall AllTest.hs
 
-test: $(BIN_TEST)
-	@for i in $(BIN_TEST); do \
-		./$$i; \
-	done
+test: AllTest
+	./AllTest
 
 lint:
 	hlint -c $(SRCS)
 
 clean:
-	rm -rf $(BIN_TEST)
+	rm -rf AllTest
 	rm -rf *.hi *.o *~
 
 .PHONY: lint clean test
