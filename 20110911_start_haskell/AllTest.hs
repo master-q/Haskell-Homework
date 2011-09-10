@@ -4,6 +4,7 @@ import MagComp
 import ApproxEq
 import CompLevel
 import Revmid
+import IsValidTP
 
 -- MagComp
 testMagComp1000 :: Test
@@ -65,6 +66,21 @@ testRevmid =
                     r2 = revmid [1,2]
                     r3 = revmid [1,2,3,4,5]
 
+-- isValidTP
+testIsValidTP :: Test
+testIsValidTP = TestCase $ do
+  assertEqual "isValidTP (2,0,0) (2,2,0) (0,2,2) (0,0,2) (-2,2,0) (-2,0,0) = True" True r1
+  assertEqual "isValidTP (2,0,0) (2,-2,0) (0,-2,-2) (0,0,-2) (-2,-2,0) (-2,0,0) = True" True r2
+  assertEqual "isValidTP (2,0,0) (2,2,0) (0,2,2) (0,0,2) (-2,0,0) (-2,2,0) = False" False r3
+  assertEqual "isValidTP (2,0,0) (2,-2,0) (0,-2,-2) (0,0,-2) (-2,0,0) (-2,-2,0) = False" False r4
+  assertEqual "isValidTP (0,0,1) (0,1,1) (1,1,0) (1,0,0) (-1,1,0) (-1,0,0) = False" False r5
+    where
+      r1 = isValidTP (2,0,0) (2,2,0)  (0,2,2)   (0,0,2)  (-2,2,0)  (-2,0,0)
+      r2 = isValidTP (2,0,0) (2,-2,0) (0,-2,-2) (0,0,-2) (-2,-2,0) (-2,0,0)
+      r3 = isValidTP (2,0,0) (2,2,0)  (0,2,2)   (0,0,2)  (-2,0,0)  (-2,2,0)
+      r4 = isValidTP (2,0,0) (2,-2,0) (0,-2,-2) (0,0,-2) (-2,0,0)  (-2,-2,0)
+      r5 = isValidTP (0,0,1) (0,1,1)  (1,1,0)   (1,0,0)  (-1,1,0)  (-1,0,0)
+
 tests :: Test
 tests = TestList [TestLabel "testMagComp1000" testMagComp1000,
                   TestLabel "testMagComp15" testMagComp15,
@@ -73,7 +89,8 @@ tests = TestList [TestLabel "testMagComp1000" testMagComp1000,
                   TestLabel "testApproxEq'" testApproxEq',
                   TestLabel "testApproxZero" testApproxZero,
                   TestLabel "testCompLevel" testCompLevel,
-                  TestLabel "testRevmid" testRevmid]
+                  TestLabel "testRevmid" testRevmid,
+                  TestLabel "testIsValidTP" testIsValidTP]
 
 main :: IO Counts
 main = runTestTT tests
