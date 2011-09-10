@@ -3,6 +3,7 @@ import Test.HUnit
 import MagComp
 import ApproxEq
 import CompLevel
+import Revmid
 
 -- MagComp
 testMagComp1000 :: Test
@@ -52,6 +53,18 @@ testCompLevel =
                   where r1 = compLevel (720, 480) (30000 / 1001) (120 * 60) 128 700
                         r2 = compLevel (352, 288) 25 (120 * 60) 128 700
 
+-- revmid
+testRevmid :: Test
+testRevmid =
+  TestCase $ do assertEqual "revmid [] = []" [] r1
+                assertEqual "revmid [1,2] = [1,2]" [1,2] r2
+                assertEqual "revmid [1,2,3,4,5] = [1,4,3,2,5]" [1,4,3,2,5] r3
+                  where
+                    r1, r2, r3 :: [Int]
+                    r1 = revmid []
+                    r2 = revmid [1,2]
+                    r3 = revmid [1,2,3,4,5]
+
 tests :: Test
 tests = TestList [TestLabel "testMagComp1000" testMagComp1000,
                   TestLabel "testMagComp15" testMagComp15,
@@ -59,7 +72,8 @@ tests = TestList [TestLabel "testMagComp1000" testMagComp1000,
                   TestLabel "testApproxEq" testApproxEq,
                   TestLabel "testApproxEq'" testApproxEq',
                   TestLabel "testApproxZero" testApproxZero,
-                  TestLabel "testCompLevel" testCompLevel]
+                  TestLabel "testCompLevel" testCompLevel,
+                  TestLabel "testRevmid" testRevmid]
 
 main :: IO Counts
 main = runTestTT tests
